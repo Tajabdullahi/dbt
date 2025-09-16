@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Customer dimension"
+
+  - name: fct_orders
+    description: "Orders fact"
+    columns:
+      - name: order_date
+        description: "Order timestamp"
+        meta:
+          dimension:
+            type: timestamp
+      - name: status
+        description: "Order status"
+        meta:
+          dimension: {}
+      - name: total_amount
+        description: "Order total amount"
+        meta:
+          dimension:
+            type: number
+          metrics:
+            total_revenue:
+              type: sum
+              description: "Sum of order totals"
+              format: '$#,##0.00'
+      - name: order_id
+        description: "Order identifier"
+        meta:
+          dimension: {}
+          metrics:
+            orders_count:
+              type: count
+              description: "Count of orders"
+      - name: customer_id
+        description: "Customer identifier"
+        meta:
+          dimension: {}
+          metrics:
+            distinct_customers:
+              type: count_distinct
+              description: "Distinct customers placing orders"
