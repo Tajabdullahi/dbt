@@ -1,0 +1,13 @@
+name: analytics_demo
+version: 1.0.0
+config-version: 2
+
+profile: analytics_demo
+
+models:
+  +materialized: view
+  analytics_demo:
+    staging:
+      +schema: staging
+    marts:
+      +schema: marts
